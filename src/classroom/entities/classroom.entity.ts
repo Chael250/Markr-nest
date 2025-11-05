@@ -1,4 +1,3 @@
-import { School } from "src/school/entities/school.entity";
 import { Student } from "src/student/entities/student.entity";
 import { Teacher } from "src/teacher/entities/teacher.entity";
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
@@ -7,6 +6,9 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGene
 export class Classroom {
     @PrimaryGeneratedColumn()
     id: number
+
+    @Column()
+    name: string
 
     @Column()
     totalStudents: number

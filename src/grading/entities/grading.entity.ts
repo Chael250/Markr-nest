@@ -1,6 +1,6 @@
 import { Student } from "src/student/entities/student.entity";
 import { Subject } from "src/subject/entities/subject.entity";
-import { Column, Entity, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: "GRADING_TB"})
 export class Grading {
@@ -11,8 +11,10 @@ export class Grading {
     marks: number
 
     @OneToOne(() => Subject)
+    @JoinColumn()
     subject: Subject
 
     @OneToOne(() => Student)
+    @JoinColumn()
     student: Student
 }

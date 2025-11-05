@@ -9,6 +9,7 @@ import { StudentModule } from './student/student.module';
 import { ClassroomModule } from './classroom/classroom.module';
 import { GradingModule } from './grading/grading.module';
 import { SchoolRequestModule } from './school-request/school-request.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { SchoolRequestModule } from './school-request/school-request.module';
     ClassroomModule,
     GradingModule,
     SchoolRequestModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
