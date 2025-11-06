@@ -15,7 +15,7 @@ export class ClassroomService {
      
     async createClassroom(createClass:CreateClass) {
         const teacher = await this.teacherRepository.findOne({ where: { user: { lastName: createClass.headTeacherName } } })
-        if (!teacher) throw new EntityNotFoundException('Teacher', 'name')
+        if (!teacher) throw new EntityNotFoundException('Teacher', 'lastName')
 
         const newClass = this.classroomRepository.create({
             name: createClass.name,

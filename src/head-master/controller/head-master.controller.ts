@@ -17,7 +17,7 @@ export class HeadMasterController {
         return this.headMasterService.findOne(id);
     }
 
-    @Post()
+    @Post('create')
     create(@Body() headMaster: CreateMaster): Promise<HeadMaster> {
         return this.headMasterService.create(headMaster);
     }

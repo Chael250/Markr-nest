@@ -3,10 +3,16 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Grading } from '../entities/grading.entity';
 import { Repository } from 'typeorm';
 import { MarksDto } from '../dtos/marks.dto';
+import { CreateMarks } from '../dtos/create-marks.dto';
+import { Subject } from 'src/subject/entities/subject.entity';
+import { Student } from 'src/student/entities/student.entity';
+import { EntityNotFoundException } from 'src/common/exceptions/EntityNotFoundException.exception';
 
 @Injectable()
 export class GradingService {
-    constructor(@InjectRepository(Grading) private readonly gradingRepository:Repository<Grading>) {}
+    constructor(@InjectRepository(Grading) private readonly gradingRepository:Repository<Grading>,
+    @InjectRepository(Subject) private readonly subjectRepository:Repository<Subject>,
+    @InjectRepository(Student) private readonly studentRepository:Repository<Student>) {}
 
     async getStudentsAndMarks(classId:number): Promise<MarksDto[]> {
         return await this.gradingRepository
@@ -24,5 +30,15 @@ export class GradingService {
                 'subject.marks AS totalMarks'
             ])
             .getRawMany()
+    }
+
+    async createMarks(createMarks: CreateMarks) {
+        const { marks, subjectId, studentId } = createMarks
+        const subject = await this.subjectRepository.findOne({ where: { id: subjectId } })
+        const student = await this.studentRepository.findOne({ where: { id: studentId } })
+        if (!subject) throw new EntityNotFoundException('Subject', 'id')
+        if (!student) throw new EntityNotFoundException('Student', 'id')
+        const newMark = this.gradingRepository.create({ marks, subject: { id: subjectId }, student: { id: studentId } })
+        return this.gradingRepository.save(newMark)
     }
 }

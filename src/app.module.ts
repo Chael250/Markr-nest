@@ -10,6 +10,7 @@ import { ClassroomModule } from './classroom/classroom.module';
 import { GradingModule } from './grading/grading.module';
 import { SchoolRequestModule } from './school-request/school-request.module';
 import { AuthModule } from './auth/auth.module';
+import { SchoolModule } from './school/school.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { AuthModule } from './auth/auth.module';
     StudentModule,
     ClassroomModule,
     GradingModule,
+    SchoolModule,
     SchoolRequestModule,
     AuthModule,
   ],

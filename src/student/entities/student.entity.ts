@@ -23,7 +23,7 @@ export class Student {
     fatherName: string
 
     @Column()
-    MotherName: string
+    motherName: string
     
     @Column()
     fatherPhone: string
