@@ -7,7 +7,7 @@ export class SchoolRequest {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column({ default: Status.PENDING })
+    @Column({ type: 'enum', enum: Status, default: Status.PENDING })
     status: Status
 
     @OneToOne(() => HeadMaster)

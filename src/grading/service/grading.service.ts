@@ -7,6 +7,7 @@ import { CreateMarks } from '../dtos/create-marks.dto';
 import { Subject } from 'src/subject/entities/subject.entity';
 import { Student } from 'src/student/entities/student.entity';
 import { EntityNotFoundException } from 'src/common/exceptions/EntityNotFoundException.exception';
+import { MarksTeacher } from '../dtos/marks-teacher.dto';
 
 @Injectable()
 export class GradingService {
@@ -15,6 +16,9 @@ export class GradingService {
     @InjectRepository(Student) private readonly studentRepository:Repository<Student>) {}
 
     async getStudentsAndMarks(classId:number): Promise<MarksDto[]> {
+        const classroom = await this.studentRepository.findOne({ where: { id: classId } })
+        if (!classroom) throw new EntityNotFoundException('Classroom', 'id')
+
         return await this.gradingRepository
             .createQueryBuilder('grading')
             .leftJoinAndSelect('grading.student', 'students')
@@ -40,5 +44,25 @@ export class GradingService {
         if (!student) throw new EntityNotFoundException('Student', 'id')
         const newMark = this.gradingRepository.create({ marks, subject: { id: subjectId }, student: { id: studentId } })
         return this.gradingRepository.save(newMark)
+    }
+
+    async getMarksByTeacher(classId:number, teacherId:number): Promise<MarksTeacher[]> {
+        return await this.gradingRepository
+            .createQueryBuilder('grading')
+            .leftJoinAndSelect('grading.subject', 'subject')
+            .leftJoinAndSelect('grading.student', 'student')
+            .leftJoinAndSelect('student.classroom', 'classroom')
+            .leftJoinAndSelect('subject.teacher', 'teacher')
+            .where('teacher.id = :teacherId', { teacherId })
+            .where('classroom.id = :classId', { classId })
+            .select([
+                'grading.marks AS marks',
+                'student.firstName AS firstname',
+                'student.lastName AS lastname',
+                'student.email AS email',
+                'subject.name AS subjectName',
+                'subject.marks AS totalMarks'
+            ])
+            .getRawMany()
     }
 }

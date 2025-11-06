@@ -11,6 +11,15 @@ import { GradingModule } from './grading/grading.module';
 import { SchoolRequestModule } from './school-request/school-request.module';
 import { AuthModule } from './auth/auth.module';
 import { SchoolModule } from './school/school.module';
+import { Classroom } from './classroom/entities/classroom.entity';
+import { Grading } from './grading/entities/grading.entity';
+import { HeadMaster } from './head-master/entities/head-master.entity';
+import { School } from './school/entities/school.entity';
+import { SchoolRequest } from './school-request/entities/school-request.entity';
+import { Student } from './student/entities/student.entity';
+import { Subject } from 'rxjs';
+import { Teacher } from './teacher/entities/teacher.entity';
+import { User } from './users/entities/users.entity';
 
 @Module({
   imports: [
@@ -25,6 +34,7 @@ import { SchoolModule } from './school/school.module';
         username: configService.get<string>('DB_USER'),
         password: configService.get<string>('DB_PASS'),
         database: configService.get<string>('DB_NAME'),
+        entities: [Classroom, Grading, HeadMaster, School, SchoolRequest, Student, Subject, Teacher, User],
         autoLoadEntities: true,
         synchronize: true, // only for dev
       }),
