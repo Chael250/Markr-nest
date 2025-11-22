@@ -2,12 +2,140 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+[![NestJS](https://img.shields.io/badge/nestjs-E0234E?style=for-the-badge&logo=nestjs&logoColor=white)](https://nestjs.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
+<p align="center">A comprehensive school management system built with <a href="http://nodejs.org" target="_blank">Node.js</a> and <a href="https://nestjs.com/" target="_blank">NestJS</a>.</p>
+
+## 🚀 Features
+
+- **Authentication & Authorization** - Secure JWT-based authentication with role-based access control
+- **User Management** - Multiple user roles (Admin, Teacher, Student, Headmaster)
+- **School Management** - Manage multiple schools and their details
+- **Classroom Management** - Organize students into classes
+- **Grading System** - Record and manage student grades
+- **Subject Management** - Organize and manage school subjects
+- **Request System** - Handle school-related requests
+
+## 🛠️ Technologies Used
+
+- **Backend Framework**: [NestJS](https://nestjs.com/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Database**: [PostgreSQL](https://www.postgresql.org/) with [TypeORM](https://typeorm.io/)
+- **Authentication**: JWT (JSON Web Tokens)
+- **Testing**: Jest
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v16 or later)
+- npm or yarn
+- PostgreSQL (v12 or later)
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Chael250/Markr-nest.git
+   cd Markr-nest
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. **Set up environment variables**
+   Create a `.env` file in the root directory and configure the following variables:
+   ```env
+   # Database
+   DB_HOST=localhost
+   DB_PORT=5432
+   DB_USERNAME=your_db_username
+   DB_PASSWORD=your_db_password
+   DB_NAME=markr_db
+
+   # JWT
+   JWT_SECRET=your_jwt_secret
+   JWT_EXPIRES_IN=1d
+
+   # App
+   PORT=3000
+   NODE_ENV=development
+   ```
+
+4. **Run database migrations**
+   ```bash
+   npm run typeorm migration:run
+   # or
+   yarn typeorm migration:run
+   ```
+
+### Running the Application
+
+- **Development mode**
+  ```bash
+  npm run start:dev
+  ```
+
+- **Production mode**
+  ```bash
+  npm run build
+  npm run start:prod
+  ```
+
+- **Testing**
+  ```bash
+  # Unit tests
+  npm run test
+
+  # E2E tests
+  npm run test:e2e
+
+  # Test coverage
+  npm run test:cov
+  ```
+
+## 🏗 Project Structure
+
+```
+src/
+├── auth/               # Authentication module
+├── classroom/          # Classroom management
+├── common/             # Common utilities and shared code
+├── grading/            # Grading system
+├── head-master/        # Headmaster specific features
+├── school/             # School management
+├── school-request/     # School request system
+├── student/            # Student management
+├── subject/            # Subject management
+├── teacher/            # Teacher management
+└── users/              # User management
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the UNLICENSED License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- [NestJS](https://nestjs.com/) - A progressive Node.js framework
+- [TypeORM](https://typeorm.io/) - ORM for TypeScript and JavaScript
+- All contributors who have helped shape this project
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
 <a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
