@@ -1,3 +1,4 @@
+import { RefreshToken } from "src/auth/entities/refresh-token.entity";
 import { UserRole } from "src/common/enum/user-role.enum";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
@@ -23,4 +24,7 @@ export class User {
 
     @Column({ enum: UserRole})
     role: string
+
+    @Column({ type: 'text', array: true, default: [] })
+    refreshTokens: string[];
 }

@@ -1,8 +1,13 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { StudentService } from '../service/student.service';
 import { CreateStudent } from '../dtos/create-student.dto';
+import { AuthGuard } from '@nestjs/passport';
+import { RolesGuard } from 'src/common/guards/roles.guard';
+import { Roles } from 'src/common/decorators/roles.decorator';
 
 @Controller('student')
+@UseGuards(AuthGuard('jwt'), RolesGuard)
+@Roles('admin', 'teacher')
 export class StudentController {
     constructor(private readonly studentService: StudentService) {}
 
